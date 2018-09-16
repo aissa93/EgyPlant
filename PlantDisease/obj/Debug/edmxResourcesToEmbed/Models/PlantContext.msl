@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PlantDiseaseModelStoreContainer" CdmEntityContainer="PlantDiseaseContext">
+    <EntitySetMapping Name="AgricultureSpecialists">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.AgricultureSpecialist">
+        <MappingFragment StoreEntitySet="AgricultureSpecialist">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Organization" ColumnName="Organization" />
+          <ScalarProperty Name="Rates" ColumnName="Rates" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Diseases">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Disease">
+        <MappingFragment StoreEntitySet="Disease">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factors">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Factor">
+        <MappingFragment StoreEntitySet="Factor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Farmers">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Farmer">
+        <MappingFragment StoreEntitySet="Farmer">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Observations">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Observation">
+        <MappingFragment StoreEntitySet="Observation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ObservationDate" ColumnName="ObservationDate" />
+          <ScalarProperty Name="PlantDiseaseId" ColumnName="PlantDiseaseId" />
+          <ScalarProperty Name="InfectionClassification" ColumnName="InfectionClassification" />
+          <ScalarProperty Name="InfectionValue" ColumnName="InfectionValue" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObservationFactors">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.ObservationFactor">
+        <MappingFragment StoreEntitySet="ObservationFactor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FactorId" ColumnName="FactorId" />
+          <ScalarProperty Name="FactorValue" ColumnName="FactorValue" />
+          <ScalarProperty Name="ObservationId" ColumnName="ObservationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plants">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.Plant">
+        <MappingFragment StoreEntitySet="Plant">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlantDiseaseFactors">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.PlantDiseaseFactor">
+        <MappingFragment StoreEntitySet="PlantDiseaseFactor">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlantDiseaseId" ColumnName="PlantDiseaseId" />
+          <ScalarProperty Name="FactorId" ColumnName="FactorId" />
+          <ScalarProperty Name="From" ColumnName="From" />
+          <ScalarProperty Name="To" ColumnName="To" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PlantDiseaseFeedback" TypeName="PlantDiseaseModel.PlantDiseaseFeedback" StoreEntitySet="PlantDiseaseFeedback">
+      <EndProperty Name="AgricultureSpecialist">
+        <ScalarProperty Name="UserId" ColumnName="AgricultureSpecialistId" />
+      </EndProperty>
+      <EndProperty Name="PlantDiseaseFactor">
+        <ScalarProperty Name="Id" ColumnName="PlantDiseaseFactorId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="PlantDiseaseJuncs">
+      <EntityTypeMapping TypeName="PlantDiseaseModel.PlantDiseaseJunc">
+        <MappingFragment StoreEntitySet="PlantDiseaseJunc">
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="DiseaseId" ColumnName="DiseaseId" />
+          <ScalarProperty Name="PlantId" ColumnName="PlantId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

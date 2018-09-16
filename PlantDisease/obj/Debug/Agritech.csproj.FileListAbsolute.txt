@@ -1,0 +1,2 @@
+c:\users\aissa\documents\visual studio 2017\Projects\PlantDisease\PlantDisease\obj\Debug\PlantDisease.dll
+c:\users\aissa\documents\visual studio 2017\Projects\PlantDisease\PlantDisease\obj\Debug\PlantDisease.pdb

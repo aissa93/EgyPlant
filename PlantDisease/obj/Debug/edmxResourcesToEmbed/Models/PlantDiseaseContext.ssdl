@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PlantDiseaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AgricultureSpecialist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Organization" Type="nvarchar" MaxLength="300" />
+    <Property Name="Rates" Type="int" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="CityId" Type="int" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryId" Type="int" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="StateId" Type="int" />
+  </EntityType>
+  <EntityType Name="Disease">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="Factor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="300" />
+    <Property Name="CreationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Observation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ObservationDate" Type="date" Nullable="false" />
+    <Property Name="PlantDiseaseId" Type="int" Nullable="false" />
+    <Property Name="InfectionClassification" Type="bit" Nullable="false" />
+    <Property Name="InfectionValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObservationFactor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FactorId" Type="int" Nullable="false" />
+    <Property Name="FactorValue" Type="decimal" Precision="18" Scale="5" Nullable="false" />
+    <Property Name="ObservationId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plant">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="PlantDiseaseFactor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantDiseaseId" Type="int" />
+    <Property Name="FactorId" Type="int" />
+    <Property Name="From" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="To" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+  </EntityType>
+  <EntityType Name="PlantDiseaseFeedback">
+    <Key>
+      <PropertyRef Name="AgricultureSpecialistId" />
+      <PropertyRef Name="PlantDiseaseFactorId" />
+    </Key>
+    <Property Name="AgricultureSpecialistId" Type="int" Nullable="false" />
+    <Property Name="PlantDiseaseFactorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlantDiseaseJunc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlantId" Type="int" Nullable="false" />
+    <Property Name="DiseaseId" Type="int" Nullable="false" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_AgricultureSpecialist_City">
+    <End Role="City" Type="Self.City" Multiplicity="0..1" />
+    <End Role="AgricultureSpecialist" Type="Self.AgricultureSpecialist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgricultureSpecialist">
+        <PropertyRef Name="CityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_City_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Country_State">
+    <End Role="State" Type="Self.State" Multiplicity="0..1" />
+    <End Role="Country" Type="Self.Country" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Country">
+        <PropertyRef Name="StateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Observation_AgricultureSpecialist">
+    <End Role="PlantDiseaseJunc" Type="Self.PlantDiseaseJunc" Multiplicity="1" />
+    <End Role="Observation" Type="Self.Observation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlantDiseaseJunc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Observation">
+        <PropertyRef Name="PlantDiseaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Observation_Plant">
+    <End Role="Plant" Type="Self.Plant" Multiplicity="1" />
+    <End Role="Observation" Type="Self.Observation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Observation">
+        <PropertyRef Name="PlantDiseaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObservationFactor_Factor">
+    <End Role="Factor" Type="Self.Factor" Multiplicity="1" />
+    <End Role="ObservationFactor" Type="Self.ObservationFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ObservationFactor">
+        <PropertyRef Name="FactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ObservationFactor_Observation">
+    <End Role="Observation" Type="Self.Observation" Multiplicity="1" />
+    <End Role="ObservationFactor" Type="Self.ObservationFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Observation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ObservationFactor">
+        <PropertyRef Name="ObservationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlantDisease_Disease">
+    <End Role="Disease" Type="Self.Disease" Multiplicity="1" />
+    <End Role="PlantDiseaseJunc" Type="Self.PlantDiseaseJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Disease">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlantDiseaseJunc">
+        <PropertyRef Name="DiseaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlantDisease_Plant">
+    <End Role="Plant" Type="Self.Plant" Multiplicity="1" />
+    <End Role="PlantDiseaseJunc" Type="Self.PlantDiseaseJunc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plant">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlantDiseaseJunc">
+        <PropertyRef Name="PlantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlantDiseaseFactor_Factor1">
+    <End Role="Factor" Type="Self.Factor" Multiplicity="0..1" />
+    <End Role="PlantDiseaseFactor" Type="Self.PlantDiseaseFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Factor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlantDiseaseFactor">
+        <PropertyRef Name="FactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlantDiseaseFactor_PlantDisease">
+    <End Role="PlantDiseaseJunc" Type="Self.PlantDiseaseJunc" Multiplicity="0..1" />
+    <End Role="PlantDiseaseFactor" Type="Self.PlantDiseaseFactor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlantDiseaseJunc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlantDiseaseFactor">
+        <PropertyRef Name="PlantDiseaseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlantDiseaseFactorLike_PlantDiseaseFactor">
+    <End Role="PlantDiseaseFactor" Type="Self.PlantDiseaseFactor" Multiplicity="1" />
+    <End Role="PlantDiseaseFeedback" Type="Self.PlantDiseaseFeedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlantDiseaseFactor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PlantDiseaseFeedback">
+        <PropertyRef Name="PlantDiseaseFactorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PlantDiseaseModelStoreContainer">
+    <EntitySet Name="AgricultureSpecialist" EntityType="Self.AgricultureSpecialist" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Disease" EntityType="Self.Disease" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factor" EntityType="Self.Factor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Observation" EntityType="Self.Observation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObservationFactor" EntityType="Self.ObservationFactor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plant" EntityType="Self.Plant" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlantDiseaseFactor" EntityType="Self.PlantDiseaseFactor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlantDiseaseFeedback" EntityType="Self.PlantDiseaseFeedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlantDiseaseJunc" EntityType="Self.PlantDiseaseJunc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AgricultureSpecialist_City" Association="Self.FK_AgricultureSpecialist_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="AgricultureSpecialist" EntitySet="AgricultureSpecialist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_City_Country" Association="Self.FK_City_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Country_State" Association="Self.FK_Country_State">
+      <End Role="State" EntitySet="State" />
+      <End Role="Country" EntitySet="Country" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Observation_AgricultureSpecialist" Association="Self.FK_Observation_AgricultureSpecialist">
+      <End Role="PlantDiseaseJunc" EntitySet="PlantDiseaseJunc" />
+      <End Role="Observation" EntitySet="Observation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Observation_Plant" Association="Self.FK_Observation_Plant">
+      <End Role="Plant" EntitySet="Plant" />
+      <End Role="Observation" EntitySet="Observation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObservationFactor_Factor" Association="Self.FK_ObservationFactor_Factor">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="ObservationFactor" EntitySet="ObservationFactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ObservationFactor_Observation" Association="Self.FK_ObservationFactor_Observation">
+      <End Role="Observation" EntitySet="Observation" />
+      <End Role="ObservationFactor" EntitySet="ObservationFactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlantDisease_Disease" Association="Self.FK_PlantDisease_Disease">
+      <End Role="Disease" EntitySet="Disease" />
+      <End Role="PlantDiseaseJunc" EntitySet="PlantDiseaseJunc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlantDisease_Plant" Association="Self.FK_PlantDisease_Plant">
+      <End Role="Plant" EntitySet="Plant" />
+      <End Role="PlantDiseaseJunc" EntitySet="PlantDiseaseJunc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlantDiseaseFactor_Factor1" Association="Self.FK_PlantDiseaseFactor_Factor1">
+      <End Role="Factor" EntitySet="Factor" />
+      <End Role="PlantDiseaseFactor" EntitySet="PlantDiseaseFactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlantDiseaseFactor_PlantDisease" Association="Self.FK_PlantDiseaseFactor_PlantDisease">
+      <End Role="PlantDiseaseJunc" EntitySet="PlantDiseaseJunc" />
+      <End Role="PlantDiseaseFactor" EntitySet="PlantDiseaseFactor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlantDiseaseFactorLike_PlantDiseaseFactor" Association="Self.FK_PlantDiseaseFactorLike_PlantDiseaseFactor">
+      <End Role="PlantDiseaseFactor" EntitySet="PlantDiseaseFactor" />
+      <End Role="PlantDiseaseFeedback" EntitySet="PlantDiseaseFeedback" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

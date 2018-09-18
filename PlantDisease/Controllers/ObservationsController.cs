@@ -66,7 +66,7 @@ namespace PlantDisease.Controllers
 
                 if (db.PlantDiseaseJuncs.FirstOrDefault(p => p.DiseaseId == config.DiseaseId && p.PlantId == config.PlantId) == null)
                 {
-                    db.PlantDiseaseJuncs.Add(new PlantDiseaseJunc() { PlantId = config.PlantId, DiseaseId = config.DiseaseId });
+                    db.PlantDiseaseJuncs.Add(new PlantDiseaseJunc() { PlantId = config.PlantId, DiseaseId = config.DiseaseId});
                     db.SaveChanges();
                    PlantDiseaseId= db.PlantDiseaseJuncs.FirstOrDefault(p => p.DiseaseId == config.DiseaseId && p.PlantId == config.PlantId).Id;
                 }
@@ -75,7 +75,7 @@ namespace PlantDisease.Controllers
 
                 }
 
-                db.Observations.Add(new Observation() {PlantDiseaseId=PlantDiseaseId,CreatedBy=1,CreatedDate=DateTime.Now,ObservationDate=DateTime.Now });
+                db.Observations.Add(new Observation() {PlantDiseaseId=PlantDiseaseId,CreatedBy=1,CreatedDate=DateTime.Now,ObservationDate=DateTime.Now ,Name=config.Name});
                 db.SaveChanges();
 
                 ObservationId= db.Observations.FirstOrDefault(o => o.PlantDiseaseId == PlantDiseaseId).Id;
@@ -107,13 +107,34 @@ namespace PlantDisease.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Observation observation = db.Observations.Find(id);
+
+
+            ObservationSheet sheet = new ObservationSheet();
+            sheet.ObservationName = observation.Name;
+            sheet.ObservationId = observation.Id;
+            sheet.Infected = observation.InfectionClassification;
+            sheet.InfectedValue = observation.InfectionValue;
+
+
+            var facs = (from ob in db.ObservationFactors
+                              join f in db.Factors
+                               on ob.FactorId equals f.Id
+                              where ob.ObservationId == observation.Id
+                              select new SheetFactor
+                              {
+                                  FactorId = ob.FactorId,
+                                  FactorValue = ob.FactorValue,
+                                  FactorName=f.Name
+                              }).Take(10);
+            //var facs= db.ObservationFactors.Where(of => of.ObservationId == observation.Id).Select(P=>new { P.FactorId, P.FactorValue}) ;
+            ViewBag.SheetFactors = facs;
+
             if (observation == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.PlantDiseaseId = new SelectList(db.PlantDiseaseJuncs, "Id", "Id", observation.PlantDiseaseId);
-            ViewBag.PlantDiseaseId = new SelectList(db.Plants, "Id", "Name", observation.PlantDiseaseId);
-            return View(observation);
+           
+            return View(sheet);
         }
 
         // POST: Observations/Edit/5

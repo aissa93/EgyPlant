@@ -11,15 +11,20 @@
         
        
         $("#AddFactor").click(function () {
-            debugger
+            
             facs += $("#factors").val() + ",";
-            $("#Facs").attr("value",facs);
+            $("#Facs").attr("value", facs);
+
+           
+
+
+            document.getElementById("FacTable").innerHTML += "<tr><td>" + document.getElementById("factors").options[document.getElementById("factors").selectedIndex].text + "</td></tr>";
 
         });
 
 
         $("#Submit").click(function () {
-            debugger
+            
             alert(facs);
             $.post("Create", { Facts: "hello" }, function (response) {
 
@@ -60,6 +65,13 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
       
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Name, null,  new { @class = "form-control", @id = "Name" })
+                @Html.ValidationMessageFor(model => model.PlantId, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PlantId, "PlantId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -91,7 +103,16 @@
             </div>
         </div>
 
-       
+       <table id="FacTable" border="1">
+           <thead>
+               <tr>
+               <td>
+                   Factors
+               </td>
+                   </tr>
+           </thead>
+
+       </table>
 
        
 

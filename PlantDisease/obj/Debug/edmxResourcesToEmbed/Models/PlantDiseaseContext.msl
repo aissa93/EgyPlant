@@ -56,6 +56,7 @@
     <EntitySetMapping Name="Observations">
       <EntityTypeMapping TypeName="PlantDiseaseModel.Observation">
         <MappingFragment StoreEntitySet="Observation">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ObservationDate" ColumnName="ObservationDate" />
           <ScalarProperty Name="PlantDiseaseId" ColumnName="PlantDiseaseId" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PlantDiseaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PlantDiseaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgricultureSpecialist">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,6 +63,7 @@
           <Property Name="InfectionValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="ObservationFactor">
           <Key>
@@ -326,8 +327,7 @@
             <End Role="PlantDiseaseFeedback" EntitySet="PlantDiseaseFeedback" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PlantDiseaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -400,6 +400,7 @@
           <NavigationProperty Name="PlantDiseaseJunc" Relationship="Self.FK_Observation_AgricultureSpecialist" FromRole="Observation" ToRole="PlantDiseaseJunc" />
           <NavigationProperty Name="Plant" Relationship="Self.FK_Observation_Plant" FromRole="Observation" ToRole="Plant" />
           <NavigationProperty Name="ObservationFactors" Relationship="Self.FK_ObservationFactor_Observation" FromRole="Observation" ToRole="ObservationFactor" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ObservationFactor">
           <Key>
@@ -737,6 +738,7 @@
           <EntitySetMapping Name="Observations">
             <EntityTypeMapping TypeName="PlantDiseaseModel.Observation">
               <MappingFragment StoreEntitySet="Observation">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ObservationDate" ColumnName="ObservationDate" />
                 <ScalarProperty Name="PlantDiseaseId" ColumnName="PlantDiseaseId" />

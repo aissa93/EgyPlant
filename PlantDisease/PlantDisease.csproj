@@ -186,6 +186,7 @@
     <Compile Include="Models\ObservationFactor.cs">
       <DependentUpon>PlantDiseaseContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ObservationSheet.cs" />
     <Compile Include="Models\Plant.cs">
       <DependentUpon>PlantDiseaseContext.tt</DependentUpon>
     </Compile>

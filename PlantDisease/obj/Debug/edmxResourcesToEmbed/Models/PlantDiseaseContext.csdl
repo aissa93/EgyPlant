@@ -69,6 +69,7 @@
     <NavigationProperty Name="PlantDiseaseJunc" Relationship="Self.FK_Observation_AgricultureSpecialist" FromRole="Observation" ToRole="PlantDiseaseJunc" />
     <NavigationProperty Name="Plant" Relationship="Self.FK_Observation_Plant" FromRole="Observation" ToRole="Plant" />
     <NavigationProperty Name="ObservationFactors" Relationship="Self.FK_ObservationFactor_Observation" FromRole="Observation" ToRole="ObservationFactor" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ObservationFactor">
     <Key>

@@ -7,6 +7,7 @@ namespace PlantDisease.Models
 {
     public class ObservationConfigViewModel
     {
+        public string Name { get; set; }
         public int PlantId { get; set; }
 
         public int DiseaseId { get; set; }

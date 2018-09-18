@@ -27,6 +27,7 @@ namespace PlantDisease.Models
         public decimal InfectionValue { get; set; }
         public int CreatedBy { get; set; }
         public System.DateTime CreatedDate { get; set; }
+        public string Name { get; set; }
     
         public virtual PlantDiseaseJunc PlantDiseaseJunc { get; set; }
         public virtual Plant Plant { get; set; }

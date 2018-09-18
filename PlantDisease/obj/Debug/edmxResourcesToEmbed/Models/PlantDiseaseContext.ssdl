@@ -58,6 +58,7 @@
     <Property Name="InfectionValue" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="ObservationFactor">
     <Key>
